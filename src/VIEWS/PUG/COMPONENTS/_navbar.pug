@@ -1,0 +1,22 @@
+//-nabvar se llama con +navbar('a', variable con los datos para este caso pages)
+-var pages = [{ name: 'Menú principal', archive: 'menu' }, { name: 'Encuentrame', archive: 'found' }]
+mixin navbar(caso, pages)
+  .nav.navbar 
+    .navbar__logo
+    if caso === 'a'
+      a(href="./index.html")
+        img(src="../../ASSETS/IMG/logo.png", alt="logo empresa")
+    else if caso === 'b'
+      a(href="../index.html")
+        img(src="../../../ASSETS/IMG/logo.png", alt="logo empresa")
+    .navbar__start
+    if caso === 'a'
+      a(href="./index.html") inicio
+    else if caso === 'b'
+      a(href="../index.html") inicio
+    .navbar__pages
+      ul
+        each page in pages
+          -var ruteHtml = () => caso === 'a' ? './PAGES/' + page.archive + '.html' : './' + page.archive + '.html'
+          li
+            a(href=ruteHtml()) #{page.name}
