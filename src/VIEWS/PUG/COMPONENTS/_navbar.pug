@@ -1,5 +1,5 @@
 //-nabvar se llama con +navbar('a', variable con los datos para este caso pages)
--var pages = [{ name: 'Menú principal', archive: 'menu', submenus: ['submenu1', 'submenu2'] }, { name: 'Encuentrame', archive: 'found' }]
+-var pages = [{ name: 'Menú principal', archive: 'menu', submenus: ['submenu3', 'submenu4'] }, { name: 'Encuentrame', archive: 'found' }]
 mixin navbar(caso, pages)
   .nav.navbar 
     .navbar__logo
@@ -23,6 +23,7 @@ mixin navbar(caso, pages)
               ul
                 if typeof page.submenus !== 'undefined' && Array.isArray(page.submenus)
                   each submenu in page.submenus
+                    -var ruteHtmltwo = () => caso === 'a' ? './PAGES/' + submenu + '.html' : './' + submenu + '.html'
                     li
-                      a(href=ruteHtml()) #{submenu}
+                      a(href=ruteHtmltwo()) #{submenu}
 
