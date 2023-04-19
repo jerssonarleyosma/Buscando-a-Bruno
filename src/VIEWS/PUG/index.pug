@@ -1,3 +1,4 @@
+include ./COMPONENTS/_navbar.pug
 doctype html
 html(lang="es")
     head
@@ -10,3 +11,5 @@ html(lang="es")
         link(rel="stylesheet", href="../../STYLES/CSS/styles.css")
         link(rel="icon", href="")
     body 
+        +navbar('a', pages)
+

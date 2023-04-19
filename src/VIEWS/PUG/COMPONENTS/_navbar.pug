@@ -1,0 +1,36 @@
+//-nabvar se llama con +navbar('a', pages) la a es para carpeta raiz y b dentro de una carpeta y pages es la variable con el nombre del menu despues su nombre en html despues los submenus igual con su name y su arvhive
+-var pages = [{name: 'Menú principal', archive: 'menu', submenus: [{ name: 'submenu3', archive: 'submenu' }, { name: 'submenu4', archive: 'submenuu' }] }, { name: 'Encuentrame', archive: 'found' } ]
+mixin navbar(caso, pages)
+  header
+    nav.navbar 
+      .navbar__logo
+      //- if para ruta de imagen del logo segun de raiz o de una carpeta abajo segun caso a o b
+      if caso === 'a'
+        a(href="./index.html")
+          img(src="../../ASSETS/IMG/logo.png", alt="logo empresa")
+      else if caso === 'b'
+        a(href="../index.html")
+          img(src="../../../ASSETS/IMG/logo.png", alt="logo empresa")
+      .navbar__start
+      //-en lo mismo pero con el hipervinculo de inicio
+      if caso === 'a'
+        a(href="./index.html") inicio
+      else if caso === 'b'
+        a(href="../index.html") inicio
+      .navbar__pages
+        ul.navbar__pages-container
+          //-un each para agregar hipervinculos y sus submenus
+          each page in pages
+            //- variable que define la ruta en caso a o b y pone el nombre del archivo y en el ancla pone el nombre que se muestra
+            -var ruteHtml = () => caso === 'a' ? './PAGES/' + page.archive + '.html' : './' + page.archive + '.html'
+            li
+              a(href=ruteHtml()) #{page.name}
+              //- aca crea 2 condicionales, una que si el tipo de page.submenus es algo y que sea un array
+              if typeof page.submenus !== 'undefined' && Array.isArray(page.submenus)
+                ul
+                  each submenu in page.submenus
+                    //-aca crea la ruta en la variable segun caso a o b pero esta vez de los submenus con su nombre de archivo y su nombre a mostrar
+                    -var ruteHtmltwo = () => caso === 'a' ? './PAGES/' + submenu.archive + '.html' : './' + submenu.archive + '.html'
+                    li
+                      a(href=ruteHtmltwo()) #{submenu.name}
+
